@@ -86,7 +86,7 @@ $('.recalls-form__btn').on('click', function (event) {
     countOfRecallsItems += 1
 
     let dateNow = new Date()
-    
+
     $(document).ready(function () {
         $('.recalls-content').prepend(`
         <div class="recalls-content__item recalls-content-item">
@@ -113,16 +113,16 @@ $('.recalls-form__btn').on('click', function (event) {
             </div>
     </div>
     `);
-    
+
         $('.recalls-content-item')[0].id = countOfRecallsItems
         if ($('.recalls-content-item__name')[0].parentNode.id == countOfRecallsItems) {
             $('.recalls-content-item__name')[0].textContent = recallInfo.userName
         }
-    
+
         if ($('.recalls-content-item__text')[0].parentNode.id == countOfRecallsItems) {
             $('.recalls-content-item__text')[0].textContent = recallInfo.userMessage
         }
-    
+
         if ($('.recalls-content-item-box__mounth')[0].parentNode.parentNode.id == countOfRecallsItems) {
             if (dateNow.getDate() < 9) {
                 $('.recalls-content-item-box__mounth')[0].textContent = '0' + dateNow.getDate()
@@ -148,7 +148,7 @@ $('.recalls-form__btn').on('click', function (event) {
                 $('.recalls-content-item-box__time')[0].textContent = dateNow.getHours() + ':' + dateNow.getMinutes()
             }
         }
-    
+
     });
 });
 
@@ -226,6 +226,7 @@ $('.exchange-column-list__item').on('click', function (event) {
 
         //
     }
+    $('.exchange-column--first').removeClass('exchange-column--first--active')
 });
 
 $('.exchange-column-list__item').on('click', function (event) {
@@ -378,7 +379,210 @@ $('.exchange-column-list__item').on('click', function (event) {
         }
     }
     // 
+
+    $('.exchange-column--second').removeClass('exchange-column--second--active')
 });
+
+$('.exchange-column-top__button').on('click', function (event) {
+    let activeElementFromSecondColumn = $('.exchange-column-list__item--active')[1]
+    if ($('.exchange-column-list__item--active')[1].parentNode.parentNode.parentNode.id == 2) {
+        if ($('.exchange-column-list__item--active')[1].id == 21 || $('.exchange-column-list__item--active')[1].id == 22 || $('.exchange-column-list__item--active')[1].id == 23  ) {
+          
+        } else {
+            if ($('.exchange-column-list__item--active')[0].parentNode.parentNode.parentNode.id == 1) {
+                for (let item of $('.exchange-column-list__item')) {
+        
+                    if (item.parentNode.parentNode.parentNode.id == 2) {
+                        $(item).removeClass('exchange-column-list__item--disabled')
+                        $(item).removeClass('exchange-column-list__item--active')
+                    }
+        
+                    if (item.parentNode.parentNode.parentNode.id == 2) {
+        
+                        if (item.id == $('.exchange-column-list__item--active')[0].id) {
+                            $(item).addClass('exchange-column-list__item--active')
+                        }
+        
+                    }
+                }
+                $('.exchange-column-choose-top__box-text--second')[0].textContent = $('.exchange-column-list__item--active')[1].textContent
+                $('.exchange-column-choose__text-short--second')[0].textContent = shortCoinName[$('.exchange-column-list__item--active')[1].id - 1]
+                $('.exchange-column-bottom__text-short-reserve--second')[0].textContent = shortCoinName[$('.exchange-column-list__item--active')[1].id - 1]
+                $('.exchange-column-bottom__box-crypto--second')[0].textContent = shortCoinName[$('.exchange-column-list__item--active')[1].id - 1]
+        
+                if ($('.exchange-column-list__item--active')[1].id == 1 || $('.exchange-column-list__item--active')[1].id == 2 || $('.exchange-column-list__item--active')[1].id == 17 || $('.exchange-column-list__item--active')[1].id == 18 || $('.exchange-column-list__item--active')[1].id == 21) {
+                    let srcForElement = 'images/reserves-icon-'
+                    let srcForElementTwo = $('.exchange-column-list__item--active')[1].id
+                    let srcForElementThree = '.svg'
+                    let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+        
+                    // Кнопки где отдаете получаете ( их иконки )
+                    let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+                    for (let item of ourCryptiButton) {
+                        if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 2) {
+                            $(item).attr('src', fullSrcForElement);
+                        }
+                    }
+                } else if ($('.exchange-column-list__item--active')[1].id == 22 || $('.exchange-column-list__item--active')[1].id == 23) {
+                    let srcForElement = 'images/reserves-icon-'
+                    let srcForElementThree = '.svg'
+                    let fullSrcForElement = srcForElement + '21' + srcForElementThree
+        
+                    // Кнопки где отдаете получаете ( их иконки )
+                    let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+                    for (let item of ourCryptiButton) {
+                        if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 2) {
+                            $(item).attr('src', fullSrcForElement);
+                        }
+                    }
+                    // 
+                } else {
+                    let srcForElement = 'images/reserves-icon-'
+                    let srcForElementTwo = $('.exchange-column-list__item--active')[1].id
+                    let srcForElementThree = '.png'
+                    let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+        
+                    // Кнопки где отдаете получаете ( их иконки )
+                    let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+                    for (let item of ourCryptiButton) {
+                        if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 2) {
+                            $(item).attr('src', fullSrcForElement);
+                        }
+                    }
+                    // 
+                }
+            }
+            if ($('.exchange-column-list__item--active')[1].parentNode.parentNode.parentNode.id == 2) {
+                for (let item of $('.exchange-column-list__item')) {
+        
+                    if (item.parentNode.parentNode.parentNode.id == 1) {
+                        $(item).removeClass('exchange-column-list__item--disabled')
+                        $(item).removeClass('exchange-column-list__item--active')
+                        console.log('smt')
+                    }
+        
+                    if (item.parentNode.parentNode.parentNode.id == 1) {
+                        if (item.id == activeElementFromSecondColumn.id) {
+                            $(item).addClass('exchange-column-list__item--active')
+                        }
+                    }
+                }
+                $('.exchange-column-choose-top__box-text--first')[0].textContent = activeElementFromSecondColumn.textContent
+                $('.exchange-column-bottom__text--first')[0].textContent = shortCoinName[activeElementFromSecondColumn.id - 1]
+                $('.exchange-column-bottom__box-crypto')[0].textContent = shortCoinName[activeElementFromSecondColumn.id - 1]
+                $('.exchange-column-bottom__text-short--first')[0].textContent = shortCoinName[activeElementFromSecondColumn.id - 1]
+        
+                // Проверка на картинку 
+                if (activeElementFromSecondColumn.id == 1 || activeElementFromSecondColumn.id == 2 || activeElementFromSecondColumn.id == 17 || activeElementFromSecondColumn.id == 18 || activeElementFromSecondColumn.id == 21 || activeElementFromSecondColumn.id == 22 || activeElementFromSecondColumn.id == 23) {
+                    let srcForElement = 'images/reserves-icon-'
+                    let srcForElementTwo = activeElementFromSecondColumn.id
+                    let srcForElementThree = '.svg'
+                    let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+                    // Кнопки где отдаете получаете ( их иконки )
+                    let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+                    for (let item of ourCryptiButton) {
+                        if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 1) {
+                            console.log('ssgd')
+                            $(item).attr('src', fullSrcForElement);
+                        }
+                    }
+                    // 
+        
+                    // 
+                } else {
+                    let srcForElement = 'images/reserves-icon-'
+                    let srcForElementTwo = activeElementFromSecondColumn.id
+                    let srcForElementThree = '.png'
+                    let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+        
+                    // Кнопки где отдаете получаете ( их иконки )
+                    let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+                    for (let item of ourCryptiButton) {
+                        if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 1) {
+                            $(item).attr('src', fullSrcForElement);
+                        }
+                    }
+                    // 
+        
+                }
+                // 
+        
+                // Делаем так что бы наши элементы не повторялись в блоках - что бы активные не повторялись в других 
+                let listItems = $('.exchange-column-list__item')
+        
+                let firstActItm = []
+                let secondActItm = []
+        
+                let ourFirstOfItmId = undefined
+                let ourSecondOfItmId = undefined
+        
+                for (let item of listItems) {
+        
+                    firstActItm.push(getIdesFirst())
+                    secondActItm.push(getIdesSecond())
+        
+                    function getIdesFirst() {
+                        if (item.parentNode.parentNode.parentNode.id == 1) {
+                            if (item.classList.contains('exchange-column-list__item--active')) {
+                                return item.id
+                            }
+                        }
+                    }
+        
+                    function getIdesSecond() {
+                        if (item.parentNode.parentNode.parentNode.id == 2) {
+                            if (item.classList.contains('exchange-column-list__item--active')) {
+                                return item.id
+                            }
+                        }
+                    }
+        
+                    ourFirstOfItmId = getIdesFirstFromArr()
+                    ourSecondOfItmId = getIdesSecondFromArr()
+        
+                    function getIdesFirstFromArr() {
+                        for (let itemOfFirstArr of firstActItm) {
+                            if (typeof (itemOfFirstArr) == typeof ('')) {
+                                return itemOfFirstArr
+                            }
+                        }
+                    }
+        
+                    function getIdesSecondFromArr() {
+                        for (let itemOfSecondArr of secondActItm) {
+                            if (typeof (itemOfSecondArr) == typeof ('')) {
+                                return itemOfSecondArr
+                            }
+                        }
+                    }
+        
+                }
+                for (let item of listItems) {
+                    // item - активный элемент с одной колонки и второй 
+                    if (item.parentNode.parentNode.parentNode.id == 1) {
+                        if (item.id == ourSecondOfItmId) {
+                            $(item).addClass('exchange-column-list__item--disabled')
+                        } else {
+                            $(item).removeClass('exchange-column-list__item--disabled')
+                        }
+                    }
+        
+                    if (item.parentNode.parentNode.parentNode.id == 2) {
+                        if (item.id == ourFirstOfItmId) {
+                            $(item).addClass('exchange-column-list__item--disabled')
+                        } else {
+                            $(item).removeClass('exchange-column-list__item--disabled')
+                        }
+                    }
+                }
+                // 
+        
+            }
+        }
+    }
+});
+
+
 
 $('.exchange-column-choose-top').on('click', function (event) {
     if (this.parentNode.parentNode.parentNode.classList.contains('exchange-column--first')) {
@@ -427,7 +631,7 @@ $('.order-form-body-item-box__btn--second').on('click', function (event) {
 });
 
 if (document.querySelector('.body').classList.contains('body-order')) {
-    document.querySelector('.order-expectation__line--blue').style.width = '100%'
+    // document.querySelector('.order-expectation__line--blue').style.width = '100%'
     let ourMinutes = 29
     let ourSeconds = 60
     setInterval(() => {
@@ -441,27 +645,28 @@ if (document.querySelector('.body').classList.contains('body-order')) {
         } else {
             $('.order-expectation__time--minutes').text(ourMinutes + ':' + ourSeconds)
         }
-        if (ourMinutes == 27) {
-            document.querySelector('.order-expectation__line--blue').style.width = '90%'
-        } else if (ourMinutes == 24) {
-            document.querySelector('.order-expectation__line--blue').style.width = '80%'
-        } else if (ourMinutes == 21) {
-            document.querySelector('.order-expectation__line--blue').style.width = '70%'
-        } else if (ourMinutes == 18) {
-            document.querySelector('.order-expectation__line--blue').style.width = '60%'
-        } else if (ourMinutes == 15) {
-            document.querySelector('.order-expectation__line--blue').style.width = '50%'
-        } else if (ourMinutes == 12) {
-            document.querySelector('.order-expectation__line--blue').style.width = '40%'
-        } else if (ourMinutes == 9) {
-            document.querySelector('.order-expectation__line--blue').style.width = '30%'
-        } else if (ourMinutes == 6) {
-            document.querySelector('.order-expectation__line--blue').style.width = '20%'
-        } else if (ourMinutes == 3) {
-            document.querySelector('.order-expectation__line--blue').style.width = '10%'
-        } else if (ourMinutes == 0) {
-            document.querySelector('.order-expectation__line--blue').style.width = '0%'
-        }
+        
+        // if (ourMinutes == 27) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '90%'
+        // } else if (ourMinutes == 24) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '80%'
+        // } else if (ourMinutes == 21) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '70%'
+        // } else if (ourMinutes == 18) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '60%'
+        // } else if (ourMinutes == 15) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '50%'
+        // } else if (ourMinutes == 12) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '40%'
+        // } else if (ourMinutes == 9) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '30%'
+        // } else if (ourMinutes == 6) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '20%'
+        // } else if (ourMinutes == 3) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '10%'
+        // } else if (ourMinutes == 0) {
+        //     document.querySelector('.order-expectation__line--blue').style.width = '0%'
+        // }
 
     }, 1000)
 }

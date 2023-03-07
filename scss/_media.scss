@@ -124,6 +124,10 @@
     .footer-menu {
         margin-right: 20px;
     }
+    .header__logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 900px) {
@@ -295,7 +299,6 @@
         gap: 15px;
     }
     .for-partners-top {
-        flex-direction: column;
         gap: 20px;
     }
     .for-partners-bottom-item__box {

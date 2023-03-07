@@ -844,36 +844,40 @@
 // for-partners
 
 .for-partners {
-    padding-top: 35px;
+    @include adaptiv-value("padding-top", 35, 25, 1);
 }
 .for-partners-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @include adaptiv-value("margin-bottom", 70, 60, 1);
+    @include adaptiv-value("margin-bottom", 40, 25, 1);
     &__title {
-        font-weight: 700;
-        font-size: 47px;
-        line-height: 72px;
-        color: #282e38;
+        font-weight: 300;
+        @include adaptiv-value("font-size", 34, 19, 1);
+        @include adaptiv-value("line-height", 43, 24, 1);
+        text-align: left;
+        color: #041e35;
     }
 
     &__btn {
         font-weight: 700;
-        font-size: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
-        line-height: 25px;
+        @include adaptiv-value("font-size", 16, 12, 1);
+        @include adaptiv-value("line-height", 15, 16, 1);
         text-align: center;
         color: #ffffff;
-        padding: 10px 20px;
-        width: 200px;
+        @include adaptiv-value("padding-top", 10, 6, 1);
+        @include adaptiv-value("padding-bottom", 10, 6, 1);
+        @include adaptiv-value("padding-right", 20, 10, 1);
+        @include adaptiv-value("padding-left", 20, 10, 1);
+        @include adaptiv-value("width", 200, 150, 1);
+        @include adaptiv-value("height", 45, 35, 1);
         background: #145896;
         box-shadow: 0px 20px 40px rgba(23, 22, 37, 0.15);
         border-radius: 30px;
         border: 1px solid #145896;
-        height: 45px;
         transition: border 0.3s, background 0.3s, color 0.3s;
         &:hover {
             background: #fff;
@@ -907,27 +911,28 @@
     }
 
     &__column-suptext {
-        @include adaptiv-value("margin-bottom", 17, 20, 1);
-        font-size: 12px;
-        line-height: 16px;
+        @include adaptiv-value("margin-bottom", 10, 8, 1);
         text-transform: uppercase;
-        color: #b6b6b6;
         max-width: 400px;
+
+        @include adaptiv-value("font-size", 13, 11, 1);
+        @include adaptiv-value("line-height", 17, 13, 1);
+        color: #b7c3cd;
     }
 
     &__column-title {
         max-width: 550px;
-        font-size: 24px;
-        line-height: 28px;
-        color: #000000;
-        @include adaptiv-value("margin-bottom", 10, 20, 1);
+        @include adaptiv-value("font-size", 22, 16, 1);
+        @include adaptiv-value("line-height", 26, 20, 1);
+        color: #145896;
+        @include adaptiv-value("margin-bottom", 10, 8, 1);
     }
 
     &__column-text {
         max-width: 633px;
-        font-size: 16px;
-        line-height: 24px;
-        color: #000000;
+        @include adaptiv-value("font-size", 14, 12, 1);
+        @include adaptiv-value("line-height", 21, 17, 1);
+        color: #041e35;
     }
 }
 
@@ -1225,12 +1230,21 @@
         position: relative;
         span {
             position: absolute;
-            width: 50%;
+            width: 0%;
             height: 4px;
             position: absolute;
             top: -2px;
             right: 0;
             background: #145896;
+            animation: lineAnim 1800s linear;
+        }
+    }
+    @keyframes lineAnim {
+        from {
+            width: 100%;
+        } 
+        to {
+            width: 0%;
         }
     }
 }
