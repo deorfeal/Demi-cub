@@ -99,6 +99,9 @@
     .header-lang__list {
         display: flex;
     }
+    svg {
+        transform: rotate(180deg)
+    }
 }
 
 // exchange
@@ -1096,19 +1099,25 @@
 
 // order
 
+.main-order-two {
+    .order-form-top {
+        margin-bottom: 30px;
+    }
+}
+
 .order {
-    padding-top: 70px;
-    padding-bottom: 40px;
+    @include adaptiv-value("padding-top", 70, 30, 1);
+    @include adaptiv-value("padding-bottom", 40, 30, 1);
     &__inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 20px;
-        margin-bottom: 40px;
+        @include adaptiv-value("margin-bottom", 40, 30, 1);
     }
 }
 .order-top {
-    margin-bottom: 70px;
+    @include adaptiv-value("margin-bottom", 70, 30, 1);
     display: flex;
     justify-content: space-between;
     gap: 60px;
@@ -1163,19 +1172,21 @@
     justify-content: space-between;
     background: #fff;
     flex-grow: 1;
+    @include adaptiv-value("gap", 15, 10, 1);
     &__text {
         font-weight: 500;
-        font-size: 24px;
         line-height: 26px;
         color: #145896;
+
+        @include adaptiv-value("font-size", 24, 20, 1);
     }
 
     &__crypto {
+        text-align: right;
         margin-left: auto;
-        font-size: 24px;
-        line-height: 29px;
+        @include adaptiv-value("font-size", 24, 20, 1);
+        @include adaptiv-value("line-height", 29, 24, 1);
         color: #041e35;
-        margin-right: 15px;
         span {
             color: #c1c1c1;
         }
@@ -1226,6 +1237,8 @@
 .order-form {
     background: #ffffff;
     padding: 25px 15px 30px 15px;
+    @include adaptiv-value("padding-top", 25, 20, 1);
+    @include adaptiv-value("padding-bottom", 30, 40, 1);
     &__button {
         font-weight: 700;
         font-size: 13px;
@@ -1244,9 +1257,16 @@
         min-width: 175px;
         max-width: 175px;
         background: #ff4e56;
+        border: 1px solid transparent;
         border-radius: 30px;
         justify-content: center;
         margin-bottom: 30px;
+        transition: border 0.3s, color 0.3s, background 0.3s;
+        &:hover {
+            background: transparent;
+            border: 1px solid #ff4e56;
+            color: #ff4e56;
+        }
     }
 
     &__btn {
@@ -1263,6 +1283,9 @@
         justify-content: center;
         color: #000000;
         margin-bottom: 30px;
+        &:hover {
+            text-decoration: unset;
+        }
     }
 
     &__text {
@@ -1274,9 +1297,19 @@
         text-align: center;
         max-width: 480px;
         a {
-            font-weight: 600px;
+            font-weight: 600;
             color: #145896;
+            &:hover {
+                text-decoration: underline;
+            }
         }
+    }
+    &__text-info {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+        margin-bottom: 30px;
+        color: #145896;
     }
 }
 .order-form-top {
@@ -1285,7 +1318,8 @@
     justify-content: space-between;
     padding-bottom: 20px;
     border-bottom: 1px solid #c5c5c5;
-    margin-bottom: 40px;
+    @include adaptiv-value("font-size", 14, 13, 1);
+    @include adaptiv-value("margin-bottom", 40, 20, 1);
     &__text {
         font-weight: 500;
         font-size: 24px;
@@ -1294,14 +1328,22 @@
     }
 
     &__box {
-        gap: 13px;
+        svg {
+            display: block;
+            min-width: 20px;
+            min-height: 20px;
+            width: 20px;
+            height: 20px;
+            flex-grow: 1;
+        }
         display: flex;
         align-items: center;
+        @include adaptiv-value("gap", 13, 18, 1);
     }
 
     &__box-text {
         max-width: 480px;
-        font-size: 14px;
+        @include adaptiv-value("font-size", 14, 13, 1);
         line-height: 21px;
         color: #041e35;
     }
@@ -1311,7 +1353,7 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    gap: 35px;
+    @include adaptiv-value("gap", 35, 30, 1);
     max-width: 600px;
 }
 .order-form-body-item {
@@ -1352,23 +1394,36 @@
     .order-form-body-item-box__input {
         padding-left: 60px;
     }
+    .order-form-body-item__text {
+        margin-bottom: 30px;
+    }
 }
 
 .order-form-body-item:nth-child(3) {
     &::before {
         content: "3";
     }
-    margin-bottom: 30px;
 }
 
 .order-form-body-item-box {
     padding-bottom: 10px;
     border-bottom: 1px solid #c5c5c5;
     position: relative;
+    &::before {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        content: '';
+    }
     &__input {
         width: 100%;
-        font-size: 18px;
-        line-height: 22px;
+        @include adaptiv-value("font-size", 18, 14, 1);
+        @include adaptiv-value("line-height", 22, 17, 1);
         background: transparent;
         display: flex;
         align-items: center;
@@ -1382,11 +1437,12 @@
     }
 
     &__btn {
-        top: -4px;
+        @include adaptiv-value("top", -4, -7, 1);
         right: 0;
         position: absolute;
         width: 30px;
         height: 30px;
+        z-index: 6;
     }
 
     &__btn-img {
@@ -1396,8 +1452,9 @@
 
     &__text {
         font-weight: 700;
-        font-size: 18px;
-        line-height: 22px;
+        z-index: 6;
+        @include adaptiv-value("font-size", 18, 16, 1);
+        @include adaptiv-value("line-height", 22, 19, 1);
         color: #145896;
         position: absolute;
         left: 0;

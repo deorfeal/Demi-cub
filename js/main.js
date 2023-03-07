@@ -1,6 +1,161 @@
+let reservesList = [
+    '8.631343',
+    '83.138742',
+    '789.338177',
+    '341.98165',
+    '769.47',
+    '9471',
+    '1058.99',
+    '28081',
+    '278159',
+    '2000',
+    '219411',
+    '597.12',
+    '354.8613',
+    '190.6741',
+    '3671.47',
+    '589.12',
+    '28641',
+    '17123',
+    '321.9481',
+    '198.38912',
+    '7490',
+    '3907731.93',
+    '518001.23',
+];
+
+let shortCoinName = [
+    'BTC',
+    'ETH',
+    'BNB',
+    'BNB',
+    'LTC',
+    'XRP',
+    'DASH',
+    'ADA',
+    'DOGE',
+    'DOT',
+    'TRX',
+    'XTZ',
+    'AVAX',
+    'ZEC',
+    'MATIC',
+    'SOL',
+    'USDT',
+    'USDT',
+    'TON',
+    'TWT',
+    'USD',
+    'KZT',
+    'RUB',
+];
+
+let recallInfo = {
+    userName: '',
+    userMessage: ''
+}
+
+let mounthList = [
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Май',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
+]
+
+let countOfRecallsItems = 0
+
+$('.recalls-form__input').on('input', function (event) {
+    recallInfo.userName = this.value
+});
+
+$('.recalls-form__textarea').on('input', function (event) {
+    recallInfo.userMessage = this.value
+});
+
+$('.recalls-form__btn').on('click', function (event) {
+    event.preventDefault()
+
+    countOfRecallsItems += 1
+
+    let dateNow = new Date()
+    
+    $(document).ready(function () {
+        $('.recalls-content').prepend(`
+        <div class="recalls-content__item recalls-content-item">
+        <p class="recalls-content-item__name">
+            Андрей
+        </p>
+        <p class="recalls-content-item__text">
+            Нужно срочно было вывести Piastrix USD на ЮМани, обменял за 2 минуты, сайт удобный и
+            понятный, буду теперь регулярно пользоваться этим обменником!
+        </p>
+        <div class="recalls-content-item__box recalls-content-item-box">
+                                    <p class="recalls-content-item-box__mounth">
+                                        06
+                                    </p>
+                                    <p class="recalls-content-item-box__mounth recalls-content-item-box__mounth--mounth">
+                                        Март
+                                    </p>
+                                    <p class="recalls-content-item-box__year">
+                                        2023,
+                                    </p>
+                                    <p class="recalls-content-item-box__time">
+                                        09:43
+                                    </p>
+            </div>
+    </div>
+    `);
+    
+        $('.recalls-content-item')[0].id = countOfRecallsItems
+        if ($('.recalls-content-item__name')[0].parentNode.id == countOfRecallsItems) {
+            $('.recalls-content-item__name')[0].textContent = recallInfo.userName
+        }
+    
+        if ($('.recalls-content-item__text')[0].parentNode.id == countOfRecallsItems) {
+            $('.recalls-content-item__text')[0].textContent = recallInfo.userMessage
+        }
+    
+        if ($('.recalls-content-item-box__mounth')[0].parentNode.parentNode.id == countOfRecallsItems) {
+            if (dateNow.getDate() < 9) {
+                $('.recalls-content-item-box__mounth')[0].textContent = '0' + dateNow.getDate()
+            } else {
+                $('.recalls-content-item-box__mounth')[0].textContent = dateNow.getDate()
+            }
+        }
+        if ($('.recalls-content-item-box__mounth--mounth')[0].parentNode.parentNode.id == countOfRecallsItems) {
+            $('.recalls-content-item-box__mounth--mounth')[0].textContent = mounthList[dateNow.getMonth()]
+        }
+        if ($('.recalls-content-item-box__year')[0].parentNode.parentNode.id == countOfRecallsItems) {
+            $('.recalls-content-item-box__year')[0].textContent = dateNow.getFullYear() + ','
+        }
+        if ($('.recalls-content-item-box__time')[0].parentNode.parentNode.id == countOfRecallsItems) {
+            if (dateNow.getHours() < 9) {
+                $('.recalls-content-item-box__time')[0].textContent = '0' + dateNow.getHours() + ':' + dateNow.getMinutes()
+                if (dateNow.getMinutes() < 9) {
+                    $('.recalls-content-item-box__time')[0].textContent = '0' + dateNow.getHours() + ':' + '0' + dateNow.getMinutes()
+                }
+            } else if (dateNow.getMinutes() < 9) {
+                $('.recalls-content-item-box__time')[0].textContent = dateNow.getHours() + ':' + '0' + dateNow.getMinutes()
+            } else {
+                $('.recalls-content-item-box__time')[0].textContent = dateNow.getHours() + ':' + dateNow.getMinutes()
+            }
+        }
+    
+    });
+});
+
+
 $('.exchange-column-list__item').on('click', function (event) {
+    console.log(shortCoinName[0])
     if (event.currentTarget.parentNode.parentNode.parentNode.id == 1) {
-        console.log('smt')
         let listItems = $('.exchange-column-list__item')
         for (let item of listItems) {
             if (item.parentNode.parentNode.parentNode.id == 1) {
@@ -24,96 +179,52 @@ $('.exchange-column-list__item').on('click', function (event) {
             }
         }
 
-        // // Проверка на картинку 
-        // if (event.currentTarget.id == 1 || event.currentTarget.id == 2 || event.currentTarget.id == 17 || event.currentTarget.id == 18 || event.currentTarget.id == 21 || event.currentTarget.id == 22 || event.currentTarget.id == 23) {
-        //     let srcForElement = 'images/reserves-icon-'
-        //     let srcForElementTwo = event.currentTarget.id
-        //     let srcForElementThree = '.svg'
-        //     let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+        // Проверка на картинку 
+        if (event.currentTarget.id == 1 || event.currentTarget.id == 2 || event.currentTarget.id == 17 || event.currentTarget.id == 18 || event.currentTarget.id == 21 || event.currentTarget.id == 22 || event.currentTarget.id == 23) {
+            let srcForElement = 'images/reserves-icon-'
+            let srcForElementTwo = event.currentTarget.id
+            let srcForElementThree = '.svg'
+            let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+            // Кнопки где отдаете получаете ( их иконки )
+            let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+            for (let item of ourCryptiButton) {
+                if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 1) {
+                    console.log('ssgd')
+                    $(item).attr('src', fullSrcForElement);
+                }
+            }
+            // 
 
-        //     // Кнопки где отдаете получаете ( их иконки )
-        //     let ourCryptiButton = $('.exchange-column-top__info-crypti')
-        //     for (let item of ourCryptiButton) {
-        //         if (item.parentNode.parentNode.parentNode.id == 1) {
-        //             $(item).attr('src', fullSrcForElement);
-        //         }
-        //     }
-        //     // 
+            // 
+        } else {
+            let srcForElement = 'images/reserves-icon-'
+            let srcForElementTwo = event.currentTarget.id
+            let srcForElementThree = '.png'
+            let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
 
-        //     // Кнопки где данные ( ввод данных )
-        //     let dataIconFirst = $('.exchange-data-box-item__row-img--first')
-        //     $(dataIconFirst).attr('src', fullSrcForElement);
-        //     // 
+            // Кнопки где отдаете получаете ( их иконки )
+            let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+            for (let item of ourCryptiButton) {
+                if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 1) {
+                    $(item).attr('src', fullSrcForElement);
+                }
+            }
+            // 
 
-        //     // 
-        // } else {
-        //     let srcForElement = 'images/reserves-icon-'
-        //     let srcForElementTwo = event.currentTarget.id
-        //     let srcForElementThree = '.png'
-        //     let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
-
-        //     // Кнопки где отдаете получаете ( их иконки )
-        //     let ourCryptiButton = $('.exchange-column-top__info-crypti')
-        //     for (let item of ourCryptiButton) {
-        //         if (item.parentNode.parentNode.parentNode.id == 1) {
-        //             $(item).attr('src', fullSrcForElement);
-        //         }
-        //     }
-        //     // 
-
-        //     // Кнопки где данные ( ввод данных )
-        //     let dataIconFirst = $('.exchange-data-box-item__row-img--first')
-        //     $(dataIconFirst).attr('src', fullSrcForElement);
-        //     // 
-        // }
+        }
         // 
 
-        // // Добавляем текст в поле ввода данных ( где показывает что отдаем и что получаем )
-        // let listOfOurSpans = $('.main-reserves-list__box-text--ourspannn')
-        // for (let itemOfSpans of listOfOurSpans) {
-        //     if (itemOfSpans.id == event.currentTarget.id) {
-        //         let ourTextofSpan = $(itemOfSpans).text()
-        //         $('.exchange-data-box-item__row-text--first').text(ourTextofSpan)
-        //     }
-        // }
-        // // 
+        // Добавляем валюту ( короткое название ) которую отдаем во все места где это нужно
+        document.querySelector('.exchange-column-bottom__box-crypto').innerHTML = shortCoinName[+event.currentTarget.id - 1]
+        document.querySelector('.exchange-column-bottom__text-short--first').innerHTML = shortCoinName[+event.currentTarget.id - 1]
+        document.querySelector('.exchange-column-bottom__text--first').innerHTML = shortCoinName[+event.currentTarget.id - 1]
+        // 
 
+        // Добавляем текст в поле отдаете 
 
-        // // Добавляем маленькую приставку текста что это за монета в поле вводе данных
-        // let valueOfFirstInput = $('.exchange-column-top__info-text--first')[0].value
+        document.querySelector('.exchange-column-choose-top__box-text--first').innerHTML = event.currentTarget.childNodes[1].childNodes[3].textContent.split(' ').join(' ')
 
-        // let ourItemsAct = $('.exchange-column-list__item--active')
-
-        // for (let actItem of ourItemsAct) {
-        //     if (actItem.parentNode.parentNode.parentNode.id == 1) {
-        //         let ourSmallTex = $('.main-reserves-list__price-digit-text')
-        //         for (let itemSmallTex of ourSmallTex) {
-        //             if (actItem.id == itemSmallTex.id) {
-        //                 let ourSmallTexTex = $(itemSmallTex).text()
-        //                 $('.exchange-data-box-item__info-text--first').text(valueOfFirstInput + '  ' + ourSmallTexTex)
-        //             }
-        //         }
-        //     }
-        // }
-        // // 
-
-        // // Меняем поля мин макс ( отдаете )
-        // let ourSpanMin = $('.main-reserves-list__item-span--min')
-        // for (let ourSpanMinItem of ourSpanMin) {
-        //     if (event.currentTarget.id == ourSpanMinItem.id) {
-        //         let ourResOfSpanMin = $(ourSpanMinItem).text()
-        //         $('.exchange-column-top-row-box__wrapper-min').text(ourResOfSpanMin)
-        //     }
-        // }
-
-        // let ourSpanMax = $('.main-reserves-list__item-span--max')
-        // for (let ourSpanMaxItem of ourSpanMax) {
-        //     if (event.currentTarget.id == ourSpanMaxItem.id) {
-        //         let ourResOfSpanMax = $(ourSpanMaxItem).text()
-        //         $('.exchange-column-top-row-box__wrapper-max').text(ourResOfSpanMax)
-        //     }
-        // }
-        // // 
+        //
     }
 });
 
@@ -132,144 +243,73 @@ $('.exchange-column-list__item').on('click', function (event) {
 
             // Убираем в первой колонке такую же валюту 
             let allListofItems = $('.exchange-column-list__item')
-            // $('.exchange-column-list__item--disabled').removeClass('exchange-column-list__item--disabled')
 
             for (let oneOfAll of allListofItems) {
                 if (oneOfAll.parentNode.parentNode.parentNode.id == 1) {
-                    if (oneOfAll.id == event.currentTarget.id) {
-                        // $(oneOfAll).addClass('exchange-column-list__item--disabled');
-                    }
+                    if (oneOfAll.id == event.currentTarget.id) {}
                 }
             }
         }
 
-        // Поле с заполнением формы ( добавляем в поле нужную валюту )
-        // let someListOfOurSpans = $('.main-reserves-list__box-text--ourspannn')
-        // for (let itemOfSpans of someListOfOurSpans) {
-        //     if (itemOfSpans.id == event.currentTarget.id) {
-        //         let ourTextofSpan = $(itemOfSpans).text()
-        //         $('.exchange-data-form__box-input--first').attr('placeholder', ourTextofSpan + ' адрес')
-        //     }
-        // }
-        // // 
+        if (event.currentTarget.id == 1 || event.currentTarget.id == 2 || event.currentTarget.id == 17 || event.currentTarget.id == 18 || event.currentTarget.id == 21) {
+            let srcForElement = 'images/reserves-icon-'
+            let srcForElementTwo = event.currentTarget.id
+            let srcForElementThree = '.svg'
+            let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
 
-        // // Делаем количество резерва 
-        // let allOurReserves = $('.main-reserves-list__price-digit')
-        // for (let item of allOurReserves) {
-        //     if (item.id == event.currentTarget.id) {
-        //         let ourText = $(item).text()
-        //         // Добавляем маленькую приставку текста что это за монета по коду
-        //         let ourListOfDifWords = $('.main-reserves-list__price-digit-text')
-        //         for (let ourShortWord of ourListOfDifWords) {
-        //             if (ourShortWord.id == event.currentTarget.id) {
-        //                 let ourLasText = $(ourShortWord).text()
-        //                 // $('.exchange-column-top-row-box__wrapper-text--digits').text(ourLasText)
-        //                 $('.exchange-column-top-row-box__wrapper-text--digits').text(ourText + ' ' + ourLasText)
-        //             }
-        //         }
-        //         // 
-        //     }
-        // }
-        // // 
+            // Кнопки где отдаете получаете ( их иконки )
+            let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+            for (let item of ourCryptiButton) {
+                if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 2) {
+                    $(item).attr('src', fullSrcForElement);
+                }
+            }
+        } else if (event.currentTarget.id == 22 || event.currentTarget.id == 23) {
+            let srcForElement = 'images/reserves-icon-'
+            let srcForElementThree = '.svg'
+            let fullSrcForElement = srcForElement + '21' + srcForElementThree
 
-        // if (event.currentTarget.id == 1 || event.currentTarget.id == 2 || event.currentTarget.id == 17 || event.currentTarget.id == 18 || event.currentTarget.id == 21) {
-        //     let srcForElement = 'images/reserves-icon-'
-        //     let srcForElementTwo = event.currentTarget.id
-        //     let srcForElementThree = '.svg'
-        //     let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
+            // Кнопки где отдаете получаете ( их иконки )
+            let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+            for (let item of ourCryptiButton) {
+                if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 2) {
+                    $(item).attr('src', fullSrcForElement);
+                }
+            }
+            // 
+        } else {
+            let srcForElement = 'images/reserves-icon-'
+            let srcForElementTwo = event.currentTarget.id
+            let srcForElementThree = '.png'
+            let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
 
-        //     // Кнопки где отдаете получаете ( их иконки )
-        //     let ourCryptiButton = $('.exchange-column-top__info-crypti')
-        //     for (let item of ourCryptiButton) {
-        //         if (item.parentNode.parentNode.parentNode.id == 2) {
-        //             $(item).attr('src', fullSrcForElement);
-        //         }
-        //     }
-        //     // 
+            // Кнопки где отдаете получаете ( их иконки )
+            let ourCryptiButton = $('.exchange-column-choose-top__box-img')
+            for (let item of ourCryptiButton) {
+                if (item.parentNode.parentNode.parentNode.parentNode.parentNode.id == 2) {
+                    $(item).attr('src', fullSrcForElement);
+                }
+            }
+            // 
+        }
 
-        //     // Кнопки где данные ( ввод данных )
-        //     let dataIconSecond = $('.exchange-data-box-item__row-img--second')
-        //     $(dataIconSecond).attr('src', fullSrcForElement);
-        //     // 
+        // Добавляем текст в поле получаете 
 
-        //     // Там где вводить емайл иконка
-        //     let emailIcon = $('.exchange-data-form__box-img')
-        //     $(emailIcon).attr('src', fullSrcForElement);
-        //     // 
-        // } else if (event.currentTarget.id == 22 || event.currentTarget.id == 23) {
-        //     let srcForElement = 'images/reserves-icon-'
-        //     let srcForElementThree = '.svg'
-        //     let fullSrcForElement = srcForElement + '21' + srcForElementThree
+        document.querySelector('.exchange-column-choose-top__box-text--second').innerHTML = event.currentTarget.childNodes[1].childNodes[3].textContent.split(' ').join(' ')
 
-        //     // Кнопки где отдаете получаете ( их иконки )
-        //     let ourCryptiButton = $('.exchange-column-top__info-crypti')
-        //     for (let item of ourCryptiButton) {
-        //         if (item.parentNode.parentNode.parentNode.id == 2) {
-        //             $(item).attr('src', fullSrcForElement);
-        //         }
-        //     }
-        //     // 
+        //
 
-        //     // Кнопки где данные ( ввод данных )
-        //     let dataIconSecond = $('.exchange-data-box-item__row-img--second')
-        //     $(dataIconSecond).attr('src', fullSrcForElement);
-        //     // 
+        // Добавляем валюту ( короткое название ) которую отдаем во все места где это нужно
+        document.querySelector('.exchange-column-choose__text-short--second').innerHTML = shortCoinName[+event.currentTarget.id - 1]
+        document.querySelector('.exchange-column-bottom__box-crypto--second').innerHTML = shortCoinName[+event.currentTarget.id - 1]
+        document.querySelector('.exchange-column-bottom__text-short-reserve--second').innerHTML = shortCoinName[+event.currentTarget.id - 1]
+        document.querySelector('.exchange-column-choose__text--reserve').innerHTML = reservesList[+event.currentTarget.id - 1]
 
-        //     // Там где вводить емайл иконка
-        //     let emailIcon = $('.exchange-data-form__box-img')
-        //     $(emailIcon).attr('src', fullSrcForElement);
-        //     // 
-        // } else {
-        //     let srcForElement = 'images/reserves-icon-'
-        //     let srcForElementTwo = event.currentTarget.id
-        //     let srcForElementThree = '.png'
-        //     let fullSrcForElement = srcForElement + srcForElementTwo + srcForElementThree
-
-        //     // Кнопки где отдаете получаете ( их иконки )
-        //     let ourCryptiButton = $('.exchange-column-top__info-crypti')
-        //     for (let item of ourCryptiButton) {
-        //         if (item.parentNode.parentNode.parentNode.id == 2) {
-        //             $(item).attr('src', fullSrcForElement);
-        //         }
-        //     }
-        //     // 
-
-        //     // Кнопки где данные ( ввод данных )
-        //     let dataIconSecond = $('.exchange-data-box-item__row-img--second')
-        //     $(dataIconSecond).attr('src', fullSrcForElement);
-        //     // 
-
-        //     // Там где вводить емайл иконка
-        //     let emailIcon = $('.exchange-data-form__box-img')
-        //     $(emailIcon).attr('src', fullSrcForElement);
-        //     // 
-        // }
-
-        // // Добавляем текст в поле ввода данных ( где показывает что отдаем и что получаем )
-        // let listOfOurSpans = $('.main-reserves-list__box-text--ourspannn')
-        // for (let itemOfSpans of listOfOurSpans) {
-        //     if (itemOfSpans.id == event.currentTarget.id) {
-        //         let ourTextofSpan = $(itemOfSpans).text()
-        //         $('.exchange-data-box-item__row-text--second').text(ourTextofSpan)
-        //     }
-        // }
-        // // 
-
-        // // Добавляем маленькую приставку текста что это за монета в поле вводе данных
-        // let ourFirstShortWord = $('.exchange-data-box-item__info-text--spsecond')
-        // let ourListOfShortWords = $('.main-reserves-list__price-digit-text')
-        // for (let shortWord of ourListOfShortWords) {
-        //     if (shortWord.id == event.currentTarget.id) {
-        //         let ourLasText = $(shortWord).text()
-        //         $(ourFirstShortWord).text(ourLasText)
-        //     }
-        // }
         // 
 
     }
 
     // Делаем так что бы наши элементы не повторялись в блоках - что бы активные не повторялись в других 
-
     let listItems = $('.exchange-column-list__item')
 
     let firstActItm = []
@@ -337,7 +377,6 @@ $('.exchange-column-list__item').on('click', function (event) {
             }
         }
     }
-
     // 
 });
 
@@ -360,7 +399,7 @@ $('.exchange-column-choose-top').on('click', function (event) {
 });
 
 $('.header-lang').on('click', function (event) {
-    if ( this.classList.contains('header-lang--active') ) {
+    if (this.classList.contains('header-lang--active')) {
         $('.header-lang').removeClass('header-lang--active')
     } else {
         $('.header-lang').addClass('header-lang--active')
@@ -371,3 +410,58 @@ $('.header__burger').on('click', function (event) {
     $('.body').toggleClass('body--menu')
 });
 
+$('.order-form-body-item-box__btn--first').on('click', function (event) {
+    var copyText = document.getElementById("button1");
+
+    copyText.select();
+
+    document.execCommand("copy");
+});
+
+$('.order-form-body-item-box__btn--second').on('click', function (event) {
+    var copyText = document.getElementById("button2");
+
+    copyText.select();
+
+    document.execCommand("copy");
+});
+
+if (document.querySelector('.body').classList.contains('body-order')) {
+    document.querySelector('.order-expectation__line--blue').style.width = '100%'
+    let ourMinutes = 29
+    let ourSeconds = 60
+    setInterval(() => {
+        ourSeconds--
+        if (ourSeconds == 1) {
+            ourMinutes--
+            ourSeconds = 59
+            $('.order-expectation__time--minutes').text(ourMinutes + ':' + ourSeconds)
+        } else if (ourSeconds < 10) {
+            $('.order-expectation__time--minutes').text(ourMinutes + ':' + '0' + ourSeconds)
+        } else {
+            $('.order-expectation__time--minutes').text(ourMinutes + ':' + ourSeconds)
+        }
+        if (ourMinutes == 27) {
+            document.querySelector('.order-expectation__line--blue').style.width = '90%'
+        } else if (ourMinutes == 24) {
+            document.querySelector('.order-expectation__line--blue').style.width = '80%'
+        } else if (ourMinutes == 21) {
+            document.querySelector('.order-expectation__line--blue').style.width = '70%'
+        } else if (ourMinutes == 18) {
+            document.querySelector('.order-expectation__line--blue').style.width = '60%'
+        } else if (ourMinutes == 15) {
+            document.querySelector('.order-expectation__line--blue').style.width = '50%'
+        } else if (ourMinutes == 12) {
+            document.querySelector('.order-expectation__line--blue').style.width = '40%'
+        } else if (ourMinutes == 9) {
+            document.querySelector('.order-expectation__line--blue').style.width = '30%'
+        } else if (ourMinutes == 6) {
+            document.querySelector('.order-expectation__line--blue').style.width = '20%'
+        } else if (ourMinutes == 3) {
+            document.querySelector('.order-expectation__line--blue').style.width = '10%'
+        } else if (ourMinutes == 0) {
+            document.querySelector('.order-expectation__line--blue').style.width = '0%'
+        }
+
+    }, 1000)
+}
