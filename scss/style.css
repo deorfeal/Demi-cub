@@ -2121,9 +2121,18 @@ body {
   color: #145896;
 }
 .order-expectation__line {
-  border: 1px solid #c1c1c1;
   width: 190px;
   position: relative;
+}
+.order-expectation__line::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #c1c1c1;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 .order-expectation__line span {
   position: absolute;
@@ -2304,7 +2313,7 @@ body {
 }
 @media (max-width: 1200px) {
   .order-form-body {
-    gap: calc(30px + 5 * ((100vw - 390px) / 810));
+    gap: calc(25px + 10 * ((100vw - 390px) / 810));
   }
 }
 
@@ -2336,6 +2345,13 @@ body {
   font-size: 18px;
   line-height: 26px;
   color: #145896;
+}
+.order-form-body-item__desc-text {
+  display: none;
+  font-size: 11px;
+  line-height: 21px;
+  color: #757575;
+  margin-top: 10px;
 }
 
 .order-form-body-item:nth-child(2)::before {
@@ -2905,5 +2921,8 @@ body {
     min-height: 32px;
     width: 32px;
     height: 32px;
+  }
+  .order-form-body-item__desc-text {
+    display: block;
   }
 }/*# sourceMappingURL=style.css.map */
